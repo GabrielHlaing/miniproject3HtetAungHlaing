@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+
+{% block header %}
+  <h1>{% block title %}All Recipes{% endblock %}</h1>
+  {% if g.user %}
+    <a class="button" href="{{ url_for('recipe.create') }}">+ New Recipe</a>
+  {% endif %}
+{% endblock %}
+
+{% block content %}
+  {% for recipe in recipes %}
+    <article class="recipe">
+      <header>
+        <h2>
+          <a href="{{ url_for('recipe.detail', id=recipe['id']) }}">
+            {{ recipe['title'] }}
+          </a>
+        </h2>
+        <div class="meta">
+          by 
+          <a href="{{ url_for('recipe.profile', username=recipe['username']) }}">
+            {{ recipe['username'] }}
+          </a>
+          on {{ recipe['created'].strftime('%Y-%m-%d') }}
+        </div>
+      </header>
+
+      <p class="body">{{ recipe['body'][:200] }}{% if recipe['body']|length > 200 %}...{% endif %}</p>
+
+      {% if g.user and g.user['id'] == recipe['author_id'] %}
+        <footer class="actions">
+          <a href="{{ url_for('recipe.edit', id=recipe['id']) }}">Edit</a>
+          <form action="{{ url_for('recipe.delete', id=recipe['id']) }}" method="post" style="display:inline;">
+            <button type="submit" onclick="return confirm('Delete this recipe?')">Delete</button>
+          </form>
+        </footer>
+      {% endif %}
+    </article>
+
+    {% if not loop.last %}
+      <hr>
+    {% endif %}
+  {% else %}
+    <p>No recipes yet. {% if g.user %}<a href="{{ url_for('recipe.create') }}">Create one!</a>{% endif %}</p>
+  {% endfor %}
+{% endblock %}
