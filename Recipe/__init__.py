@@ -72,8 +72,4 @@ def create_app(test_config=None):
     from . import profile
     app.register_blueprint(profile.bp)
 
-    @app.route('/')
-    def hello():
-        return 'Hello from Recipe App!'
-
     return app
