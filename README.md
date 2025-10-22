@@ -1,42 +1,64 @@
 ### INF601 - Advanced Programming in Python
 ### Htet Aung Hlaing
 ### Mini Project 3
- 
- 
+
 # Project Title
- 
-Miniproject 1 Stock Tickers
- 
+
+Mini Project 3: Recipe Sharing Web Application
+
 ## Description
- 
-This project retrieves the last 10 trading days of closing prices for five selected stock tickers using the **yFinance API**.  
-It then generates graphs for each stock and automatically saves them as PNG files in the `charts/` directory.   
+
+- This project is a full-stack recipe management web application built using **Flask**.  
+- It allows users to register, log in, create, edit, and delete their recipes.  
+- Each recipe is stored in an SQLite database and linked to its author’s profile.  
+
+The app also uses **Bootstrap** for to style as a modern and elegant interface, featuring modals for profile editing and delete confirmations, and a card-based recipe layout.
 
 ## Getting Started
- 
-### Dependencies
 
-* Install the required Python packages using:
-```
+### Dependencies
+* Install the required packages using:
+```commandline
 pip install -r requirements.txt
 ```
- 
-### Executing program
-Run the script with:
+
+### Initialize Database
+* Create a database table by:
+```commandline
+flask --app Recipe init-db 
 ```
-python main.py
+### Executing the Program
+
+Run the Flask app with:
+```commandline
+flask --app Recipe run
 ```
- 
+* Then open your browser and visit: `http://127.0.0.1:5000/`
+
+
+## Features
+
+* User authentication (register, login, logout)
+* Create, edit, and delete recipes
+* Profile editing modal with live form updates
+* Card-based recipe listing with dark theme
+* Bootstrap modals for delete confirmations
+* SQLite database integration
+* Flash message system for success/error notifications
+
 ## Authors
-* Gabriel Hlaing
- 
+
+* Htet Aung Hlaing
+
 ## Version History
-* 0.1
-    * Initial Release
- 
+
+* 1.0  
+    * Complete Flask CRUD application  
+    * Dark Bootstrap UI added  
+    * Profile edit and delete modals implemented  
 
 ## Acknowledgments
 
-* [Matplotlib Tutorial](https://matplotlib.org/stable/tutorials/pyplot.html)
-* [Yahoo Finance](https://finance.yahoo.com/lookup/)
-* [yFinance Documentation](https://ranaroussi.github.io/yfinance/)
+* [Flask Tutorial](https://flask.palletsprojects.com/en/stable/tutorial/)
+* [Bootstrap 5](https://getbootstrap.com/)
+* [SQLite](https://www.sqlite.org/)
