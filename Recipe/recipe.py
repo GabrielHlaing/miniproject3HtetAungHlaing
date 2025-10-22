@@ -108,23 +108,3 @@ def delete(id):
     db.execute('DELETE FROM recipe WHERE id = ?', (id,))
     db.commit()
     return redirect(url_for('recipe.index'))
-
-
-# --- User Profile Page ---
-@bp.route('/profile/<username>')
-def profile(username):
-    db = get_db()
-    user = db.execute(
-        'SELECT id, username FROM user WHERE username = ?',
-        (username,)
-    ).fetchone()
-
-    if user is None:
-        abort(404, f"User '{username}' not found.")
-
-    recipes = db.execute(
-        'SELECT id, title, created FROM recipe WHERE author_id = ? ORDER BY created DESC',
-        (user['id'],)
-    ).fetchall()
-
-    return render_template('recipe/profile.html', user=user, recipes=recipes)

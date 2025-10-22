@@ -12,20 +12,20 @@
     <article class="recipe">
       <header>
         <h2>
-          <a href="{{ url_for('recipe.detail', id=recipe['id']) }}">
             {{ recipe['title'] }}
-          </a>
         </h2>
         <div class="meta">
-          by 
-          <a href="{{ url_for('recipe.profile', username=recipe['username']) }}">
+          Created by
+          <a href="{{ url_for('profile.view', username=recipe['username']) }}">
             {{ recipe['username'] }}
           </a>
           on {{ recipe['created'].strftime('%Y-%m-%d') }}
         </div>
       </header>
 
-      <p class="body">{{ recipe['body'][:200] }}{% if recipe['body']|length > 200 %}...{% endif %}</p>
+      <p class="body">{{ recipe['body'][:50] }}{% if recipe['body']|length > 50 %}...<a href="{{ url_for('recipe.detail', id=recipe['id']) }}">
+            See more
+          </a>{% endif %}</p>
 
       {% if g.user and g.user['id'] == recipe['author_id'] %}
         <footer class="actions">

@@ -63,6 +63,10 @@ def create_app(test_config=None):
     app.register_blueprint(recipe.bp)
     app.add_url_rule('/', endpoint='index')
 
+    # --- Register profile blueprint ---
+    from . import profile
+    app.register_blueprint(profile.bp)
+
     @app.route('/')
     def hello():
         return 'Hello from Recipe App!'
