@@ -28,6 +28,7 @@
 
 import os
 from flask import Flask
+from flask import Flask, flash as flask_flash
 
 def create_app(test_config=None):
     # creates and configures the Flask app
@@ -49,6 +50,10 @@ def create_app(test_config=None):
         os.makedirs(app.instance_path)
     except OSError:
         pass
+
+    # --- Override flash globally ---
+    def flash(message, category="success"):
+        flask_flash(message, category)
 
     # --- Register database ---
     from . import db

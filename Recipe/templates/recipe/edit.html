@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+{% block header %}
+  <h1 class="mb-4">{% block title %}Edit Recipe{% endblock %}</h1>
+{% endblock %}
+
+{% block content %}
+<div class="container mt-4" style="max-width: 700px;">
+  <div class="card shadow-sm">
+    <div class="card-body">
+      <form method="post">
+        <div class="mb-3">
+          <label for="title" class="form-label fw-semibold">Title</label>
+          <input
+            type="text"
+            class="form-control"
+            id="title"
+            name="title"
+            value="{{ recipe['title'] }}"
+            required
+          >
+        </div>
+
+        <div class="mb-3">
+          <label for="body" class="form-label fw-semibold">Body</label>
+          <textarea
+            class="form-control"
+            id="body"
+            name="body"
+            rows="8"
+            required
+          >{{ recipe['body'] }}</textarea>
+        </div>
+
+        <button type="submit" class="btn btn-success">Update Recipe</button>
+        <a href="{{ url_for('recipe.index') }}" class="btn btn-secondary ms-2">Cancel</a>
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock %}
